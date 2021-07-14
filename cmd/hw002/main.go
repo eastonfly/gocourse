@@ -11,7 +11,7 @@ func main() {
 	fmt.Println("Please, enter the amount:")
 	fmt.Scan(&n)
 	fmt.Println("------------------------------")
-	defer fmt.Println("Here it is the row of",n,"Fibonachi numbers")
+	defer fmt.Printf("Here it is the row of %d Fibonachi numbers", n)
 	defer fmt.Println("\n----------------------------")
 	fibon.Printer(n)
 }
