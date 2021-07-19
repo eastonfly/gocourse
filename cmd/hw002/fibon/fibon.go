@@ -2,7 +2,7 @@ package fibon
 
 import "fmt"
 
-func Printer(n int) {
+func Print(n int) {
 	switch {
 	case n == 0:
 		fmt.Println(0)

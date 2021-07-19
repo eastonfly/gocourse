@@ -13,5 +13,5 @@ func main() {
 	fmt.Println("------------------------------")
 	defer fmt.Printf("Here it is the row of %d Fibonachi numbers", n)
 	defer fmt.Println("\n----------------------------")
-	fibon.Printer(n)
+	fibon.Print(n)
 }
