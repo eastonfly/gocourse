@@ -4,7 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
+
+var mySigningKey = []byte("eastonfly")
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -24,9 +29,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		name := r.FormValue("name")
 		address := r.FormValue("address")
 
+		token := jwt.New(jwt.SigningMethodHS256)
+
+		claims := make(jwt.MapClaims)
+		claims["name"] = name + ":" + address
+		claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+		token.Claims = claims
+
+		tokenString, _ := token.SignedString(mySigningKey)
+
 		cookie := &http.Cookie{
 			Name:  "token",
-			Value: name + ":" + address,
+			Value: tokenString,
 		}
 
 		http.SetCookie(w, cookie)
